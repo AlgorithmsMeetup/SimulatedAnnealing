@@ -1,7 +1,8 @@
 # SimulatedAnnealing
 An optimization algorithm modeled on temperature physics!
 
-from http://katrinaeg.com/simulated-annealing.html
+(from http://katrinaeg.com/simulated-annealing.html)
+
 1. First, generate a random solution
 2. Calculate its cost using some cost function you've defined
 3. Generate a random neighboring solution
