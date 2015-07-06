@@ -14,25 +14,18 @@ function generateRandomSolution(){
     itemToAdd = items[randomIndex(items)];
   }
   return solution;
-
 };
 
-function randomIndex(list){
-  return Math.floor(Math.random()*list.length);
-}
-function weigh(solution){
-  return solution.reduce(function(total, item){ return total + item.weight}, 0);
-}
-
-function generateNeighboringSolution(solution){
+function generateNeighboringSolution(oldSolution){
   // var currentSolution = currentSolution || random
   // add, swap, or remove item randomly
-
-  var whatToDo = Math.floor(Math.random()*3);
+  var solution = oldSolution.slice();
   var index = randomIndex(solution);
   var newItem = items[randomIndex(items)];
   var numberOfAttemptsAtValidNeighborSolution = 0;
-  while( numberOfAttemptsAtValidNeighborSolution || knapsack.maxWeight < weigh(solution) ){
+  while( !numberOfAttemptsAtValidNeighborSolution || knapsack.maxWeight < weigh(solution) ){
+    var whatToDo = Math.floor(Math.random()*3);
+    solution = oldSolution.slice();
     if(whatToDo === 0){
       // add
       solution.splice(index, 0, newItem);
@@ -45,30 +38,37 @@ function generateNeighboringSolution(solution){
     }
     numberOfAttemptsAtValidNeighborSolution += 1;
   }
-  console.log('numberOfAttemptsAtValidNeighborSolution',numberOfAttemptsAtValidNeighborSolution);
+  // console.log('numberOfAttemptsAtValidNeighborSolution',numberOfAttemptsAtValidNeighborSolution);
   return solution;
 }
 
 function calculateCost(solution){
-
-  return 'cost';
+  return solution.reduce(function(total, item){
+    return total + item.value;
+  }, 0);
 }
 
-function simulateAnnealing(generateNeighboringSolution, calculateCost, acceptanceProbability){
+function acceptance_probability(old_cost, new_cost, temperature){
+  // t=100 prob high
+  // t=0 prob low/zero
+  return Math.pow(Math.E, (new_cost - old_cost)/temperature);
+}
+
+function simulateAnnealing(){
   // First, generate a random solution
   // 2. Calculate its cost using some cost function you've defined
   // 3. Generate a random neighboring solution
   // 4. Calculate the new solution's cost
   // 5. Compare them: If cnew < cold: move to the new solution; If cnew > cold: maybe move to the new solution
   // 6. Repeat steps 3-5 above until an acceptable solution is found or you reach some maximum number of iterations.
-  var solution = generateSolution();
+  var solution = generateRandomSolution();
   var old_cost = calculateCost(solution);
   var temperature = 1.0;
   var temperature_min = 0.00001;
   var alpha = 0.9;
   while(temperature > temperature_min){
     var i = 1;
-    while(i <= 100){
+    while(i <= 1000){
       var new_solution = generateNeighboringSolution(solution);
       var new_cost = calculateCost(new_solution);
       var ap = acceptance_probability(old_cost, new_cost, temperature);
@@ -83,8 +83,15 @@ function simulateAnnealing(generateNeighboringSolution, calculateCost, acceptanc
   return solution;
 };
 
-var soln1 = generateRandomSolution()
-console.log('random', soln1.map(function(i){return i.name;}));
-var soln2 = generateNeighboringSolution(soln1)
-console.log('neighboring', soln2.map(function(i){return i.name;}));
-// console.log(simulateAnnealing(generateRandomSolution, calculateCost));
+///////////////////////////////////
+// HELPER FUNCTIONS              //
+// don't modify, but you can use //
+///////////////////////////////////
+
+function randomIndex(list){
+  return Math.floor(Math.random()*list.length);
+}
+
+function weigh(solution){
+  return solution.reduce(function(total, item){ return total + item.weight}, 0);
+}
