@@ -34,7 +34,7 @@ def anneal(solution):
             new_solution = neighbor(solution)
             new_cost = cost(new_solution)
             ap = acceptance_probability(old_cost, new_cost, T)
-            if ap > random():
+            if ap > random(0,1)
                 solution = new_solution
                 old_cost = new_cost
             i += 1
