@@ -1,4 +1,4 @@
-var knapsack = {items: [], maxWeight: 17, currentWeight: 0}; // NP-hard
+var knapsack = {items: [], maxWeight: 17}; // NP-hard
 var items = [ // allowed multiple of each
   {name:'apple',    weight:3, value:20},
   {name:'blanket',  weight:4, value:40},
