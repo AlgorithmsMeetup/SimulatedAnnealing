@@ -8,13 +8,7 @@ Simulated Annealing is a way to generate a 'pretty good' solution to NP problems
 
 The likelihood of this algorithm accepting a bad solution is high at the beginning and decreases over time—this is where the comparison to annealing comes in. Think of excited atoms bouncing around as in a gas. They can spread out and explore a lot of the solution space. But as their internal energy decreases, these atoms congeal around a good (if not best) solution. This analogy gives the simulated annealing algorithm its name.
 
-(!https://en.wikipedia.org/wiki/Simulated_annealing#/media/File:Hill_Climbing_with_Simulated_Annealing.gif)
-
-[!https://en.wikipedia.org/wiki/Simulated_annealing#/media/File:Hill_Climbing_with_Simulated_Annealing.gif]
-
-[!https://en.wikipedia.org/wiki/Simulated_annealing#/media/File:Hill_Climbing_with_Simulated_Annealing.gif](Simulated Annealing gif from Wikipedia)
-
-(!https://en.wikipedia.org/wiki/Simulated_annealing#/media/File:Hill_Climbing_with_Simulated_Annealing.gif)[Simulated Annealing gif from Wikipedia]
+![https://en.wikipedia.org/wiki/Simulated_annealing#/media/File:Hill_Climbing_with_Simulated_Annealing.gif](Simulated Annealing gif from Wikipedia)
 Simulated annealing searching for a maximum. The objective here is to get to the highest point, however, it is not enough to use a simple hill climb algorithm, as there are many local maxima. By cooling the temperature slowly the global maximum is found.
 
 ###Steps
